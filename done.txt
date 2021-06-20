@@ -6,3 +6,6 @@ Versor3|void printf()
 Versor3|nlerp( const Versor3& a,const Versor3& b, Scalar t)
 Versor3|slerp( const Versor3& a,const Versor3& b, Scalar t)
 Versor3|Vector3::asVersor()
+quaternion|Vector3::printf()
+quaternion|Q-Fields and constructor
+quaternion|Q-Ide: this constructor construct the identity rotation

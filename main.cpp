@@ -51,6 +51,7 @@ int main()
 {
 
     Versor3 testSlerp = slerp(Versor3::down(), Versor3::right(), 0.5f);
+    Versor3::down().printf();
     unitTestInverse();
     unitTestCumlate();
     return 0;

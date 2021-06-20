@@ -97,12 +97,13 @@ public:
     Versor3 asVersor() const;
 
     void printf() const {
-        std::cout <<"Vector("<< x << ", "<<  y << ", "
-            << z << ")"
-            << std::endl;
+        std::cout <<this<< std::endl;
     }
 };
 
+std::ostream& operator<<(std::ostream& strm, const Vector3& a) {
+    return strm << "Vector3(" << a.x << ", " << a.y << ", " << a.z << ")";
+}
 
 inline Scalar dot(const Vector3 &a, const Vector3 &b){
     return a.x*b.x + a.y*b.y + a.z*b.z;

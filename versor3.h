@@ -56,12 +56,14 @@ public:
     }
 
     void printf() const {
-        std::cout << "Versor(" << x << ", " << y << ", "
-            << z << ")"
-            << std::endl;
+        std::cout << Vector3(x,y,z) << std::endl;
     }
-
+    //const_cast<Versor3&>(*this)
 };
+
+std::ostream& operator<<(std::ostream& strm, const Versor3& a) {
+    return strm << "Versor3(" << a.x << ", " << a.y << ", " << a.z << ")";
+}
 
 inline Versor3 normalize(Vector3 p){
     Scalar n = norm(p);
@@ -93,7 +95,7 @@ inline Versor3 nlerp( const Versor3& a,const Versor3& b, Scalar t){
 }
 
 inline Versor3 slerp( const Versor3& a,const Versor3& b, Scalar t){
-    double angle = asin(dot(a,b));
+    Scalar angle = asin(dot(a,b));
     Vector3 leftElementh = (sin((1 - t) * angle) / sin(angle)) * a;
     Vector3 rightElementh = (sin(t * angle) / sin(angle)) * b;
     return (leftElementh + rightElementh).asVersor();
@@ -103,8 +105,8 @@ inline Versor3 slerp( const Versor3& a,const Versor3& b, Scalar t){
 
 // under my own resposability, I declare this vector to be unitary and therefore a VERSOR
 inline Versor3 Vector3::asVersor() const{
-    double magnitude = norm(Vector3(x, y, z));
-    double machineEpsilon = std::numeric_limits<double>::epsilon();
+    Scalar magnitude = norm(Vector3(x, y, z));
+    Scalar machineEpsilon = std::numeric_limits<double>::epsilon();
     assert("Non era normalizzato\n", magnitude <= 1 + machineEpsilon && magnitude >= 1 - machineEpsilon);
     return Versor3(x,y,z);
 }

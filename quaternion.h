@@ -17,15 +17,19 @@ class Quaternion{
 public:
 
     /* fields */
-    // TODO Q-Fields: which fields to store? (also add a constuctor taking these fields).
 
+    Vector3 imaginaryPart;
+    Scalar realPart;
+
+    static Quaternion identity() { return Quaternion(0, 0, 0); }
+
+    Quaternion(Scalar _realPart, Vector3 _imaginaryPart) :realPart(_realPart), imaginaryPart(_imaginaryPart) { }
 
     Quaternion(Scalar a, Scalar b, Scalar c){
         // TODO Q-Constr
     }
 
-    // TODO Q-Ide: this constructor construct the identity rotation
-    Quaternion(){}
+    Quaternion():realPart(1), imaginaryPart(Vector3(0,0,0)){ }
 
     // TODO Q-FromPoint
     // returns a quaternion encoding a point
@@ -114,7 +118,9 @@ public:
         return false;
     }
 
-    void printf() const {} // TODO Print
+    void printf() const {
+        std::cout << "Quaternion with real part:" << realPart << ", and immaginary part:" << imaginaryPart << ", "<< std::endl;
+    } 
 };
 
 
