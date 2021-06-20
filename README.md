@@ -12,3 +12,5 @@ Versor3|Vector3::asVersor()
 quaternion|Vector3::printf()
 quaternion|Q-Fields and constructor
 quaternion|Q-Ide: this constructor construct the identity rotation
+Transform|lerp( const Transform &a, const Transform &b, float t )
+quaternion|printf()

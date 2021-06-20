@@ -96,8 +96,9 @@ public:
     Point3 asPoint() const;
     Versor3 asVersor() const;
 
+    friend std::ostream& operator<<(std::ostream&, const Vector3&);
     void printf() const {
-        std::cout <<this<< std::endl;
+        std::cout << *this << std::endl;
     }
 };
 

@@ -49,7 +49,7 @@ void unitTestCumlate(){
 
 int main()
 {
-
+    Vector3::left().printf();
     Versor3 testSlerp = slerp(Versor3::down(), Versor3::right(), 0.5f);
     Versor3::down().printf();
     unitTestInverse();

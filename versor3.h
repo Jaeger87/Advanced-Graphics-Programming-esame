@@ -55,8 +55,10 @@ public:
         return Vector3(x,y,z);
     }
 
+    friend std::ostream& operator<<(std::ostream&, const Versor3&);
+
     void printf() const {
-        std::cout << Vector3(x,y,z) << std::endl;
+        std::cout << *this << std::endl;
     }
     //const_cast<Versor3&>(*this)
 };

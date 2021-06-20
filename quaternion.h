@@ -118,11 +118,17 @@ public:
         return false;
     }
 
+    friend std::ostream& operator<<(std::ostream&, const Quaternion&);
+
     void printf() const {
-        std::cout << "Quaternion with real part:" << realPart << ", and immaginary part:" << imaginaryPart << ", "<< std::endl;
+        std::cout << *this << std::endl;
     } 
 };
 
+std::ostream& operator<<(std::ostream& strm, const Quaternion& a) {
+    return strm << "Quaternion with real part:" << a.realPart
+        << ", and immaginary part:" << a.imaginaryPart << std::endl;;
+}
 
 // interpolation or roations
 inline Quaternion lerp( const Quaternion& a,const Quaternion& b, Scalar t){

@@ -29,6 +29,9 @@ public:
     Versor3 backward()const  { return +rotation.axisZ(); }
 
     // constructor: is the ide
+    Transform(Scalar _scale, Rotation _rotation, Vector3  _translation) :scale(_scale), rotation(_rotation), translation(_translation) {}
+
+    // constructor: is the ide
     Transform():scale(1),rotation(),translation(0,0,0){}
 
     Versor3 apply(Versor3 dir){
@@ -55,7 +58,6 @@ public:
         return result;
     }
 
-
     void invert(); // TODO T-invert  (in-place)
 
     // CUMULATE: first b, then *this
@@ -78,13 +80,19 @@ public:
         // TODO: use methods
     }
 
-    void printf() const {} // TODO
+    void printf() const {
+        std::cout << "Transform with Scale:" << scale
+            << ", Rotation:" << rotation << ", Translation: " << translation << std::endl;
+    }
 
 };
 
 Transform lerp( const Transform &a, const Transform &b, float t ){
-    // TODO: T-lerp
 
-    return Transform();
+    Scalar newScale = 1-t * a.scale + t * b.scale;
+    Rotation rotation = lerp(a.rotation, b.rotation, t);
+    Vector3 newTranslation = lerp(a.translation, b.translation, t);
+
+    return Transform(newScale, rotation, newTranslation);
 }
 
