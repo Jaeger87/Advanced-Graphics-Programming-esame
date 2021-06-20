@@ -3,8 +3,6 @@
 
 #include "transform.h"
 
-using namespace std;
-
 
 
 
@@ -51,6 +49,8 @@ void unitTestCumlate(){
 
 int main()
 {
+
+    Versor3 testSlerp = slerp(Versor3::down(), Versor3::right(), 0.5f);
     unitTestInverse();
     unitTestCumlate();
     return 0;

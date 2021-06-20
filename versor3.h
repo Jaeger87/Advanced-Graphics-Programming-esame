@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include "vector3.h"
+#include <assert.h>
 
 typedef double Scalar;
 
@@ -92,13 +93,19 @@ inline Versor3 nlerp( const Versor3& a,const Versor3& b, Scalar t){
 }
 
 inline Versor3 slerp( const Versor3& a,const Versor3& b, Scalar t){
-    // TODO slerp
-    return Versor3::up();
+    double angle = asin(dot(a,b));
+    Vector3 leftElementh = (sin((1 - t) * angle) / sin(angle)) * a;
+    Vector3 rightElementh = (sin(t * angle) / sin(angle)) * b;
+    return (leftElementh + rightElementh).asVersor();
 }
+
+
 
 // under my own resposability, I declare this vector to be unitary and therefore a VERSOR
 inline Versor3 Vector3::asVersor() const{
-    // TODO: a nice assert?
+    double magnitude = norm(Vector3(x, y, z));
+    double machineEpsilon = std::numeric_limits<double>::epsilon();
+    assert("Non era normalizzato\n", magnitude <= 1 + machineEpsilon && magnitude >= 1 - machineEpsilon);
     return Versor3(x,y,z);
 }
 
