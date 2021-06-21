@@ -108,7 +108,7 @@ inline Versor3 slerp( const Versor3& a,const Versor3& b, Scalar t){
 // under my own resposability, I declare this vector to be unitary and therefore a VERSOR
 inline Versor3 Vector3::asVersor() const{
     Scalar magnitude = norm(Vector3(x, y, z));
-    Scalar machineEpsilon = std::numeric_limits<double>::epsilon();
+    constexpr Scalar machineEpsilon = std::numeric_limits<double>::epsilon();
     assert("Non era normalizzato\n", magnitude <= 1 + machineEpsilon && magnitude >= 1 - machineEpsilon);
     return Versor3(x,y,z);
 }

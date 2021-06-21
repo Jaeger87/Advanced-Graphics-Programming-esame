@@ -14,3 +14,5 @@ quaternion|Q-Fields and constructor
 quaternion|Q-Ide: this constructor construct the identity rotation
 Transform|lerp( const Transform &a, const Transform &b, float t )
 quaternion|printf()
+Matrix3|M-Ide: this constructor construct the identity rotation
+Matrix3|M-Fields: which fields to store? (also add a constuctor taking these fields).

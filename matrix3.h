@@ -17,18 +17,23 @@ class Matrix3{
 public:
 
     /* fields */
-    // TODO M-Fields: which fields to store? (also add a constuctor taking these fields).
+    Versor3 matrix[3];
 
-
-    // TODO M-Ide: this constructor construct the identity rotation
-    Matrix3(){}
+    Matrix3() : Matrix3(Versor3::right(), Versor3::up(), Versor3::fowrard()) {}
+    
 
     // constructor that takes as input the coefficient (RAW-MAJOR order!)
     Matrix3(Scalar m00, Scalar m01, Scalar m02,
             Scalar m10, Scalar m11, Scalar m12,
-            Scalar m20, Scalar m21, Scalar m22){
-        // TODO M-Constr
+            Scalar m20, Scalar m21, Scalar m22) : Matrix3(Vector3(m00, m10, m20).asVersor(),
+                Vector3(m01, m11, m21).asVersor(),
+                Vector3(m02, m12, m22).asVersor()) {
     }
+
+   // Matrix3(Versor3 column1, Versor3 column2, Versor3 column3):{matrix[0] = column1; matrix[1] = column2; matrix[2] = column3; }
+
+    Matrix3(Versor3 column1, Versor3 column2, Versor3 column3) :matrix{ column1, column2, column3}{}
+
 
     Vector3 apply( Vector3  v) const {
         // TODO M-App: how to apply a rotation of this type?
@@ -41,7 +46,7 @@ public:
     }
 
     Point3 apply( Point3 p ) const {
-        return apply( p.asVector() ).t();
+        return apply( p.asVector() ).asPoint();
     }
 
     // syntactic sugar: "R( p )" as a synomim of "R.apply( p )"
