@@ -58,7 +58,11 @@ public:
         return result;
     }
 
-    void invert(); // TODO T-invert  (in-place)
+    void invert() {
+        scale = 1 / scale;
+        rotation = rotation.inverse();
+        translation = rotation.apply((-translation) * scale);
+    }
 
     // CUMULATE: first b, then *this
     Transform operator * (const Transform &b){

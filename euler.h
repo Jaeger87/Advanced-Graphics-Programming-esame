@@ -17,8 +17,7 @@ class Euler{
 public:
 
     /* fields */
-    // TODO E-Fields: which fields to store? (also add a constuctor taking these fields).
-
+    Scalar alpha, beta, gamma;
 
     // TODO E-Ide: this constructor construct the identity rotation
     Euler(){}
@@ -59,6 +58,7 @@ public:
         return Euler();
     }
 
+    //Non la fate (converti prima ad altro)
     Euler inverse() const{
         // TODO E-Inv a
         return Euler();
@@ -119,7 +119,7 @@ inline Euler directLerp( const Euler& a,const Euler& b, Scalar t){
     // TODO E-directLerp: how to interpolate Eulers
     return Euler();
 }
-
+//Non la fate (converti prima ad altro)
 inline Euler lerp( const Euler& a,const Euler& b, Scalar t){
     // TODO E-smartLerp: how to interpolate Eulers
     return Euler();

@@ -128,7 +128,7 @@ public:
 
     void printf() const {
         std::cout << *this << std::endl;
-    } // TODO Print
+    }
 };
 
 std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
@@ -143,6 +143,7 @@ inline Matrix3 directLerp( const Matrix3& a,const Matrix3& b, Scalar t){
     return Matrix3();
 }
 
+//Non la fate (converti prima ad altro)
 inline Matrix3 lerp( const Matrix3& a,const Matrix3& b, Scalar t){
     // TODO M-smartLerp: how to interpolate Matrix3s
     return Matrix3();

@@ -66,12 +66,11 @@ public:
     }
 
     Quaternion inverse() const{
-        // TODO Q-Inv a
-        return Quaternion();
+        return Quaternion(realPart, -imaginaryPart);
     }
 
-    void invert() const{
-        // TODO Q-Inv b
+    void invert(){
+        imaginaryPart = -imaginaryPart;
     }
 
     // specific methods for quaternions...

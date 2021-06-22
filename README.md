@@ -23,3 +23,10 @@ Matrix3|Versor3 axisZ()
 Matrix3|inverse() const
 Matrix3|invert() const
 Matrix3|printf() const
+Transform|invert() 
+Euler|E-Fields
+AxisAngle|A-Field
+AxisAngle|invert()
+AxisAngle|inverse()
+Quaternion|invert()
+Quaternion|inverse()

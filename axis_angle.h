@@ -17,8 +17,8 @@ class AxisAngle{
 public:
 
     /* fields */
-    // TODO A-Field: which fields to store? (also add a constuctor taking these fields).
-
+    Scalar angle;
+    Versor3 axis;
 
     // TODO A-Ide: this constructor construct the identity rotation
     AxisAngle(){}
@@ -29,6 +29,9 @@ public:
         // TODO
     }
 
+    AxisAngle(const Versor3 _axis, const Scalar _angle) : axis(_axis), angle(_angle){}
+
+    //Non la fate (converti prima ad altro)
     Vector3 apply( Vector3  v) const {
         // TODO A-App: how to apply a rotation of this type?
         return Vector3();
@@ -58,12 +61,11 @@ public:
     }
 
     AxisAngle inverse() const{
-        // TODO A-Inv a
-        return AxisAngle();
+        return AxisAngle(axis, -angle);
     }
 
-    void invert() const{
-        // TODO A-Inv b
+    void invert(){
+        angle = -angle;
     }
 
     // returns a rotation to look toward target, if you are in eye, and the up-vector is up
