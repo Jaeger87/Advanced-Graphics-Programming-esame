@@ -14,10 +14,13 @@ class AxisAngle;
 class Euler;
 
 class Matrix3{
+
+private:
+    Versor3 matrix[3];
 public:
 
     /* fields */
-    Versor3 matrix[3];
+    
 
     Matrix3() : Matrix3(Versor3::right(), Versor3::up(), Versor3::fowrard()) {}
     
@@ -36,8 +39,12 @@ public:
 
 
     Vector3 apply( Vector3  v) const {
-        // TODO M-App: how to apply a rotation of this type?
-        return Vector3();
+        // Matrice per vettore: dot product per ogni riga col vettore v
+
+        Vector3 row1 = Vector3(matrix[0].x, matrix[1].x, matrix[2].x);
+        Vector3 row2 = Vector3(matrix[0].y, matrix[1].y, matrix[2].y);
+        Vector3 row3 = Vector3(matrix[0].z, matrix[1].z, matrix[2].z);
+        return Vector3(dot(row1, v), dot(row2, v), dot(row3, v));
     }
 
     // Rotations can be applied to versors or vectors just as well
@@ -54,9 +61,18 @@ public:
     Point3  operator() (Point3  p) { return apply(p); }
     Vector3 operator() (Vector3 p) { return apply(p); }
 
-    Versor3 axisX() const;  // TODO M-Ax a
-    Versor3 axisY() const;  // TODO M-Ax b
-    Versor3 axisZ() const;  // TODO M-Ax c
+    Versor3 axisX() const
+    {
+        return matrix[0];
+    }
+    Versor3 axisY() const 
+    {
+        return matrix[1];
+    }
+    Versor3 axisZ() const 
+    {
+        return matrix[2];
+    }
 
     // combine two rotations (r goes first!)
     Matrix3 operator * (Matrix3 r) const {
@@ -64,12 +80,16 @@ public:
     }
 
     Matrix3 inverse() const{
-        // TODO M-Inv a
-        return Matrix3();
+        return Matrix3(matrix[0].x, matrix[0].y, matrix[0].z,
+            matrix[1].x, matrix[1].y, matrix[1].z,
+            matrix[2].x, matrix[2].y, matrix[2].z);
     }
 
-    void invert() const{
-        // TODO M-Inv b
+    void invert() { 
+        Matrix3 newMatrix = inverse();
+        matrix[0] = newMatrix.axisX();
+        matrix[1] = newMatrix.axisY();
+        matrix[2] = newMatrix.axisZ();
     }
 
     // returns a rotation to look toward target, if you are in eye, and the up-vector is up
@@ -104,10 +124,19 @@ public:
     static Matrix3 rotationY( Scalar angleDeg );   // TODO M-Ry
     static Matrix3 rotationZ( Scalar angleDeg );   // TODO M-Rz
 
-    void printf() const {} // TODO Print
+    friend std::ostream& operator<<(std::ostream&, const Matrix3&);
+
+    void printf() const {
+        std::cout << *this << std::endl;
+    } // TODO Print
 };
 
+std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
+    return strm << "Matrix3: [" << a.axisX()[0] << ", " << a.axisY()[0] << ", " << a.axisZ()[0] << std::endl <<
+        a.axisX()[1] << ", " << a.axisY()[1] << ", " << a.axisZ()[1] << std::endl <<
+        a.axisX()[2] << ", " << a.axisY()[2] << ", " << a.axisZ()[2] << "]";
 
+}           
 // interpolation of roations
 inline Matrix3 directLerp( const Matrix3& a,const Matrix3& b, Scalar t){
     // TODO M-directLerp: how to interpolate Matrix3s

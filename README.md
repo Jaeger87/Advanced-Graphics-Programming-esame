@@ -16,3 +16,10 @@ Transform|lerp( const Transform &a, const Transform &b, float t )
 quaternion|printf()
 Matrix3|M-Ide: this constructor construct the identity rotation
 Matrix3|M-Fields: which fields to store? (also add a constuctor taking these fields).
+Matrix3|Vector3 apply( Vector3  v) const.
+Matrix3|Versor3 axisX()
+Matrix3|Versor3 axisY()
+Matrix3|Versor3 axisZ()
+Matrix3|inverse() const
+Matrix3|invert() const
+Matrix3|printf() const

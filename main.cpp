@@ -2,7 +2,7 @@
 #include <math.h>
 
 #include "transform.h"
-
+#include "matrix3.h"
 
 
 
@@ -35,7 +35,6 @@ void unitTestCumlate(){
     t1.scale = 4;
     t2.translation = Vector3(4,-3,1);
     t2.scale = 0.4;
-
     Point3 p(3,1,3);
     Point3 q0 = t2.apply ( t1.apply(p) );
     Point3 q1 = (t2*t1).apply ( p );
@@ -52,6 +51,10 @@ int main()
     Vector3::left().printf();
     Versor3 testSlerp = slerp(Versor3::down(), Versor3::right(), 0.5f);
     Versor3::down().printf();
+
+    Matrix3 matrix = Matrix3();
+    std::cout << matrix << std::endl;
+
     unitTestInverse();
     unitTestCumlate();
     return 0;
