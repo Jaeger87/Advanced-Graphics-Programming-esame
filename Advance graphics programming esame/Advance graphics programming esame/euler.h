@@ -16,7 +16,7 @@ class Euler{
 public:
 
     /* fields */
-    Scalar x, y, z;
+    Scalar pitchX, yawY, rollZ;
 
     // TODO E-Ide: this constructor construct the identity rotation
     Euler();
@@ -66,7 +66,7 @@ public:
 
     // conversions to this representation
     static Euler from( Quaternion m );
-    static Euler from( Euler e );     
+    static Euler from( Matrix3 e );     
     static Euler from( AxisAngle e ); 
 
     // does this Euler encode a rotation?
@@ -83,7 +83,7 @@ public:
 };
 
 inline std::ostream& operator<<(std::ostream& strm, const Euler& a) {
-	return strm << "Euler(X:" << a.x << ", y:" << a.y << ", z:" << a.z << ")";
+	return strm << "Euler(X:" << a.pitchX << ", y:" << a.yawY << ", z:" << a.rollZ << ")";
 }
 
 // interpolation or roations

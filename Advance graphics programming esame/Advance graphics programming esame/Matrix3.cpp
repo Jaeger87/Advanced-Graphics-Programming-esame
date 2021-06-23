@@ -105,7 +105,10 @@ class Euler;
 
     // conversions to this representation
     Matrix3 Matrix3::from(Quaternion m) { return Matrix3(); }// TODO Q2M
-    Matrix3 Matrix3::from(Euler e) { return Matrix3(); }     // TODO E2M
+    Matrix3 Matrix3::from(Euler e) {
+
+        return Matrix3(); 
+    }     // TODO E2M
     Matrix3 Matrix3::from(AxisAngle e) { return Matrix3(); } // TODO A2M
 
     // does this Matrix3 encode a rotation?

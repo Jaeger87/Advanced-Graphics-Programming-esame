@@ -1,5 +1,5 @@
 #pragma once
-
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include "vector3.h"
 #include "point3.h"
@@ -89,7 +89,34 @@
 
 	// conversions to this representation
 	Euler Euler::from(Quaternion m) { return Euler(); }// TODO Q2M
-	Euler Euler::from(Euler e) { return Euler(); }     // TODO E2M
+	Euler Euler::from(Matrix3 m) {
+		Euler e;
+		Scalar sp = -m.matrix[1].z;
+		if (sp <= -1.0)
+			e.pitchX = -M_PI_2;
+		else if (sp >= 1.0)
+			e.pitchX = M_PI_2;
+		else
+			e.pitchX = asin(sp);
+
+		//Check for the Gimbal Lock, give some tolerance
+		Scalar tol = 1.0 - std::numeric_limits<double>::epsilon();
+		if (abs(sp) > tol)
+		{
+			//looking straight up or down
+			e.rollZ = 0.0;
+			e.yawY = atan2(-m.matrix[2].y, m.matrix[0].x);
+		}
+		else
+		{
+			e.yawY = atan2(m.matrix[0].z, m.matrix[2].z);
+			e.rollZ = atan2(m.matrix[1].x, m.matrix[1].y);
+		}
+
+		return e;
+
+		return Euler(); 
+	}     // TODO E2M
 	Euler Euler::from(AxisAngle e) { return Euler(); } // TODO E2M
 
 	// does this Euler encode a rotation?

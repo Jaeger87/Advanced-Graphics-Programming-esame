@@ -77,10 +77,9 @@
 
 	AxisAngle AxisAngle::from(Quaternion q) // trovata su internet: https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/index.htm
 	{
-		//Scalar angle = 2 * acos(q.realPart);
-		//Versor3 axis = normalize(q.imaginaryPart);
-		//return AxisAngle(axis, angle);
-		return AxisAngle();
+		Scalar angle = 2 * acos(q.realPart);
+		Versor3 axis = normalize(q.imaginaryPart);
+		return AxisAngle(axis, angle);
 	}
 
 	// does this AxisAngle encode a point?

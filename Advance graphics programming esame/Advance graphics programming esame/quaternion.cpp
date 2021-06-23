@@ -93,7 +93,7 @@
 
 	// conversions to this representation
 	static Quaternion from(Matrix3 m);   // TODO M2Q
-	static Quaternion from(Euler e);     // TODO E2Q
+	static Quaternion from(Euler e) ;     // TODO E2Q
 
 	Quaternion Quaternion::from(AxisAngle e) //formula trovata nell'internet: https://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
 	{
@@ -118,6 +118,3 @@
 	void Quaternion::printf() const {
 		std::cout << *this << std::endl;
 	}
-
-
-
