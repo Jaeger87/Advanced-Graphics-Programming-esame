@@ -1,9 +1,6 @@
 #pragma once
 
 #include <math.h>
-#include "vector3.h"
-#include "point3.h"
-#include "versor3.h"
 
 /* Matrix3 class */
 /* this class is a candidate to store a rotation! */
@@ -13,132 +10,87 @@ class Quaternion;
 class AxisAngle;
 class Euler;
 
-class Matrix3{
+class Versor3;
+class Point3;
+class Vector3;
 
-private:
-    Versor3 matrix[3];
+class Matrix3{
+    
 public:
 
     /* fields */
-    
+    Versor3 matrix[3];
 
-    Matrix3() : Matrix3(Versor3::right(), Versor3::up(), Versor3::forward()) {}
+    Matrix3();
     
 
     // constructor that takes as input the coefficient (RAW-MAJOR order!)
     Matrix3(Scalar m00, Scalar m01, Scalar m02,
-            Scalar m10, Scalar m11, Scalar m12,
-            Scalar m20, Scalar m21, Scalar m22) : Matrix3(Vector3(m00, m10, m20).asVersor(),
-                Vector3(m01, m11, m21).asVersor(),
-                Vector3(m02, m12, m22).asVersor()) {
-    }
+        Scalar m10, Scalar m11, Scalar m12,
+        Scalar m20, Scalar m21, Scalar m22);
 
    // Matrix3(Versor3 column1, Versor3 column2, Versor3 column3):{matrix[0] = column1; matrix[1] = column2; matrix[2] = column3; }
 
-    Matrix3(Versor3 column1, Versor3 column2, Versor3 column3) :matrix{ column1, column2, column3}{}
+    Matrix3(Versor3 column1, Versor3 column2, Versor3 column3);
 
 
-    Vector3 apply( Vector3  v) const {
-        // Matrice per vettore: dot product per ogni riga col vettore v
-
-        Vector3 row1 = Vector3(matrix[0].x, matrix[1].x, matrix[2].x);
-        Vector3 row2 = Vector3(matrix[0].y, matrix[1].y, matrix[2].y);
-        Vector3 row3 = Vector3(matrix[0].z, matrix[1].z, matrix[2].z);
-        return Vector3(dot(row1, v), dot(row2, v), dot(row3, v));
-    }
+    Vector3 apply(Vector3  v) const;
 
     // Rotations can be applied to versors or vectors just as well
-    Versor3 apply( Versor3 dir ) const {
-        return apply( dir.asVector() ).asVersor();
-    }
+    Versor3 apply(Versor3 dir) const;
 
-    Point3 apply( Point3 p ) const {
-        return apply( p.asVector() ).asPoint();
-    }
+    Point3 apply(Point3 p) const;
 
     // syntactic sugar: "R( p )" as a synomim of "R.apply( p )"
-    Versor3 operator() (Versor3 p) { return apply(p); }
-    Point3  operator() (Point3  p) { return apply(p); }
-    Vector3 operator() (Vector3 p) { return apply(p); }
+    Versor3 operator() (Versor3 p);
+    Point3  operator() (Point3  p);
+    Vector3 operator() (Vector3 p);
 
-    Versor3 axisX() const
-    {
-        return matrix[0];
-    }
-    Versor3 axisY() const 
-    {
-        return matrix[1];
-    }
-    Versor3 axisZ() const 
-    {
-        return matrix[2];
-    }
+    Versor3 axisX() const;
+    Versor3 axisY() const;
+    Versor3 axisZ() const;
 
     // combine two rotations (r goes first!)
-    Matrix3 operator * (Matrix3 r) const {
-        return Matrix3();
-    }
+    Matrix3 operator * (Matrix3 r) const;
 
-    Matrix3 inverse() const{
-        return Matrix3(matrix[0].x, matrix[0].y, matrix[0].z,
-            matrix[1].x, matrix[1].y, matrix[1].z,
-            matrix[2].x, matrix[2].y, matrix[2].z);
-    }
+    Matrix3 inverse() const;
 
-    void invert() { 
-        Matrix3 newMatrix = inverse();
-        matrix[0] = newMatrix.axisX();
-        matrix[1] = newMatrix.axisY();
-        matrix[2] = newMatrix.axisZ();
-    }
+    void invert();
 
     // returns a rotation to look toward target, if you are in eye, and the up-vector is up
-    static Matrix3 lookAt( Point3 eye, Point3 target, Versor3 up = Versor3::up() ){
-        // TODO M-LookAt
-        return Matrix3();
-    }
+    static Matrix3 lookAt(Point3 eye, Point3 target, Versor3 up);
 
     // returns a rotation
-    static Matrix3 toFrom( Versor3 to, Versor3 from ){
-        // TODO M-ToFrom
-        return Matrix3();
-    }
+    static Matrix3 toFrom(Versor3 to, Versor3 from);
 
-    static Matrix3 toFrom( Vector3 to, Vector3 from ){
-        return toFrom( normalize(to) , normalize(from) );
-    }
+    static Matrix3 toFrom(Vector3 to, Vector3 from);
 
     // conversions to this representation
-    static Matrix3 from( Quaternion m );// TODO Q2M
-    static Matrix3 from( Euler e );     // TODO E2M
-    static Matrix3 from( AxisAngle e ); // TODO A2M
+    static Matrix3 from( Quaternion m );
+    static Matrix3 from( Euler e );     
+    static Matrix3 from( AxisAngle e );
 
     // does this Matrix3 encode a rotation?
-    bool isRot() const{
-        // TODO M-isR
-        return false;
-    }
+    bool isRot() const;
 
     // return a rotation matrix around an axis
-    static Matrix3 rotationX( Scalar angleDeg );   // TODO M-Rx
-    static Matrix3 rotationY( Scalar angleDeg );   // TODO M-Ry
-    static Matrix3 rotationZ( Scalar angleDeg );   // TODO M-Rz
+    static Matrix3 rotationX( Scalar angleDeg ); 
+    static Matrix3 rotationY( Scalar angleDeg );  
+    static Matrix3 rotationZ( Scalar angleDeg );   
 
-    //friend std::ostream& operator<<(std::ostream&, const Matrix3&);
+    friend std::ostream& operator<<(std::ostream&, const Matrix3&);
 
-    void printf() const {
-        std::cout << "*this" << std::endl;
-    }
+    void printf() const;
 };
 
-/*
-std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
+
+inline std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
     return strm << "Matrix3: [" << a.axisX()[0] << ", " << a.axisY()[0] << ", " << a.axisZ()[0] << std::endl <<
         a.axisX()[1] << ", " << a.axisY()[1] << ", " << a.axisZ()[1] << std::endl <<
         a.axisX()[2] << ", " << a.axisY()[2] << ", " << a.axisZ()[2] << "]";
 
 }  
-*/
+
 // interpolation of roations
 inline Matrix3 directLerp( const Matrix3& a,const Matrix3& b, Scalar t){
     // TODO M-directLerp: how to interpolate Matrix3s

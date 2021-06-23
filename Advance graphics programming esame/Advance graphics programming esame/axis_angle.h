@@ -1,10 +1,5 @@
 #pragma once
-
 #include <math.h>
-#include "vector3.h"
-#include "point3.h"
-#include "versor3.h"
-#include "quaternion.h"
 
 /* AxisAngle class */
 /* this class is a candidate to store a rotation! */
@@ -12,6 +7,10 @@
 
 class Matrix3;
 class Euler;
+class Quaternion;
+class Versor3;
+class Point3;
+class Vector3;
 
 class AxisAngle{
 public:
@@ -67,15 +66,15 @@ public:
     // does this AxisAngle encode a point?
     bool isPoint() const;
 
-    //friend std::ostream& operator<<(std::ostream&, const AxisAngle&);
+    friend std::ostream& operator<<(std::ostream&, const AxisAngle&);
 
     void printf() const;
 };
-/*
-std::ostream& operator<<(std::ostream& strm, const AxisAngle& a) {
+
+inline std::ostream& operator<<(std::ostream& strm, const AxisAngle& a) {
     return strm << "AxisAngle: Axis(" << a.axis << "), " << "Angle(" << a.angle << ")";
 }
-*/
+
 // interpolation or rotations
 inline AxisAngle lerp( const AxisAngle& a,const AxisAngle& b, Scalar t){
     // TODO A-Lerp: how to interpolate AxisAngles

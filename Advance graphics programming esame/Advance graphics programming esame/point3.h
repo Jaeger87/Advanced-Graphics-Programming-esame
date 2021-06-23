@@ -3,6 +3,8 @@
 #include "vector3.h"
 
 class Point3{
+private:
+    friend std::ostream& operator<<(std::ostream&, const Point3&);
 public:
     Scalar x,y,z;
 
@@ -65,13 +67,23 @@ public:
         return squaredNorm(*this - b) < EPSILON2;
     }
 
+    //friend std::ostream& operator<<(std::ostream&, const Point3&);
+    /*
     void printf() const {
         std::cout << "Point(" << x << ", " << y << ", "
             << z << ")"
             << std::endl;
     } 
+    */
+	void printf() const {
+		std::cout << *this << std::endl;
+	}
+
 };
 
+inline std::ostream& operator<<(std::ostream &strm, const Point3 &a) {
+	return strm <<"Point(" << a.x << ", " << a.y << ", "<< a.z << ")";
+}
 
 inline Point3 lerp( const Point3& a,const Point3& b, Scalar t){
     return a + t*(b-a);

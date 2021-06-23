@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="axis_angle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
     <ClCompile Include="quaternion.cpp" />
   </ItemGroup>
   <ItemGroup>

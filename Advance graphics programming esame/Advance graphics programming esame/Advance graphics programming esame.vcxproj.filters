@@ -24,6 +24,9 @@
     <ClCompile Include="axis_angle.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix3.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="axis_angle.h">

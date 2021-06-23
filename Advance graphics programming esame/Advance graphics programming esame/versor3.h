@@ -57,18 +57,17 @@ public:
         return Vector3(x,y,z);
     }
 
-    //friend std::ostream& operator<<(std::ostream&, const Versor3&);
+    friend std::ostream& operator<<(std::ostream&, const Versor3&);
 
     void printf() const {
-        std::cout << "*this" << std::endl;
+        std::cout << *this << std::endl;
     }
-    //const_cast<Versor3&>(*this)
 };
-/*
-std::ostream& operator<<(std::ostream& strm, const Versor3& a) {
+
+inline std::ostream& operator<<(std::ostream& strm, const Versor3& a) {
     return strm << "Versor3(" << a.x << ", " << a.y << ", " << a.z << ")";
 }
-*/
+
 inline Versor3 normalize(Vector3 p){
     Scalar n = norm(p);
     return Versor3( p.x/n, p.y/n, p.z/n );

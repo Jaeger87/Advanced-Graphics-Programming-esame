@@ -1,16 +1,14 @@
 #include <math.h>
-#include "vector3.h"
-#include "point3.h"
 #include "versor3.h"
 #include "quaternion.h"
 #include "euler.h";
 #include "axis_angle.h";
 #include "matrix3.h";
-#include <iostream>
 
 /* AxisAngle class */
 /* this class is a candidate to store a rotation! */
 /* as such, it implements all expected methods    */
+
 
 
 	AxisAngle::AxisAngle() : axis(Versor3::forward()), angle(0) {}
@@ -92,7 +90,7 @@
 	}
 
 	void AxisAngle::printf() const {
-		std::cout << "*this" << std::endl;
+		std::cout << *this << std::endl;
 	}
 
 

@@ -27,7 +27,7 @@
 		return result.imaginaryPart;
 	}
 
-	// Rotations can be applied to versors or vectors just as well
+	// Rotations can be applied to versor or vectors just as well
 	Versor3 Quaternion::apply(Versor3 dir) const {
 		return apply(dir.asVector()).asVersor();
 	}
