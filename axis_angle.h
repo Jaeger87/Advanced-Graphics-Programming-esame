@@ -4,6 +4,7 @@
 #include "vector3.h"
 #include "point3.h"
 #include "versor3.h"
+#include "quaternion.h"
 
 /* AxisAngle class */
 /* this class is a candidate to store a rotation! */
@@ -20,21 +21,16 @@ public:
     Scalar angle;
     Versor3 axis;
 
-    // TODO A-Ide: this constructor construct the identity rotation
-    AxisAngle(){}
+    AxisAngle(): axis(Versor3::forward()), angle(0) {}
 
-    // TODO: A-FromPoint
     // returns a AxisAngle encoding a point
-    AxisAngle( const Point3& p){
-        // TODO
-    }
+    AxisAngle( const Point3& p): axis(normalize(p.asVector())), angle(0){}
 
     AxisAngle(const Versor3 _axis, const Scalar _angle) : axis(_axis), angle(_angle){}
 
-    //Non la fate (converti prima ad altro)
     Vector3 apply( Vector3  v) const {
-        // TODO A-App: how to apply a rotation of this type?
-        return Vector3();
+        Quaternion q = Quaternion::from(*this);
+        return q.apply(v);
     }
 
     // Rotations can be applied to versors or vectors just as well

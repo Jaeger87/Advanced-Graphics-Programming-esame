@@ -41,7 +41,7 @@ public:
     }
 
     Point3 apply( Point3 p ) const {
-        return apply( p.asVector() ).t();
+        return apply( p.asVector() ).asPoint();
     }
 
     // syntactic sugar: "R( p )" as a synomim of "R.apply( p )"

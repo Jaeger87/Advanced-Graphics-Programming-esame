@@ -15,7 +15,7 @@ public:
     static Versor3 left()    { return Versor3(-1, 0, 0);} // aka WEST
     static Versor3 up()      { return Versor3( 0,+1, 0);}
     static Versor3 down()    { return Versor3( 0,-1, 0);}
-    static Versor3 fowrard() { return Versor3( 0, 0,+1);} // aka NORTH
+    static Versor3 forward() { return Versor3( 0, 0,+1);} // aka NORTH
     static Versor3 backward(){ return Versor3( 0, 0,-1);} // aka SOUTH
 
     // access to the coordinates: to write them

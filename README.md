@@ -30,3 +30,12 @@ AxisAngle|invert()
 AxisAngle|inverse()
 Quaternion|invert()
 Quaternion|inverse()
+Quaternion|conjugated()
+Quaternion|conjugate()
+Quaternion|Q-Constr
+Quaternion|Q-FromPoint()
+Quaternion|apply(Vector3  v)
+Quaternion|from(AxisAngle e)
+AxisAngle|A-Ide: this constructor construct the identity rotation
+AxisAngle|A-FromPoint
+AxisAngle|apply( Vector3  v)

@@ -22,7 +22,7 @@ public:
     /* fields */
     
 
-    Matrix3() : Matrix3(Versor3::right(), Versor3::up(), Versor3::fowrard()) {}
+    Matrix3() : Matrix3(Versor3::right(), Versor3::up(), Versor3::forward()) {}
     
 
     // constructor that takes as input the coefficient (RAW-MAJOR order!)

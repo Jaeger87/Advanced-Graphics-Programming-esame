@@ -82,6 +82,7 @@ public:
     // places this transform in the given origin, looking (Z-axis) toward target, given the up vector
     void place( Point3 origin, Point3 target, Versor3 up ){
         // TODO: use methods
+
     }
 
     void printf() const {

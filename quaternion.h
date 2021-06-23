@@ -4,6 +4,9 @@
 #include "vector3.h"
 #include "point3.h"
 #include "versor3.h"
+#include "axis_angle.h"
+#include "euler.h"
+#include "matrix3.h"
 
 /* Quaternion class */
 /* this class is a candidate to store a rotation! */
@@ -25,21 +28,16 @@ public:
 
     Quaternion(Scalar _realPart, Vector3 _imaginaryPart) :realPart(_realPart), imaginaryPart(_imaginaryPart) { }
 
-    Quaternion(Scalar a, Scalar b, Scalar c){
-        // TODO Q-Constr
-    }
+    Quaternion(Scalar a, Scalar b, Scalar c):realPart(1), imaginaryPart(Vector3(a, b, c)) {}
 
     Quaternion():realPart(1), imaginaryPart(Vector3(0,0,0)){ }
 
-    // TODO Q-FromPoint
     // returns a quaternion encoding a point
-    Quaternion( const Point3& p){
-        // TODO
-    }
+    Quaternion(const Point3& p):realPart(0), imaginaryPart(Vector3(p.x, p.y, p.z)) {}
 
-    Vector3 apply( Vector3  v) const {
-        // TODO Q-App: how to apply a rotation of this type?
-        return Vector3();
+    Vector3 apply(Vector3  v) const {
+        Quaternion result = *this * Quaternion(v.asPoint()) * this->conjugated();
+        return result.imaginaryPart;
     }
 
     // Rotations can be applied to versors or vectors just as well
@@ -62,11 +60,14 @@ public:
 
     // conjugate
     Quaternion operator * (Quaternion r) const {
-        return Quaternion();
+        Scalar newRealPart = dot(this->imaginaryPart, r.imaginaryPart) +  this->realPart + r.realPart;
+        Vector3 newImaginary = this->imaginaryPart * r.realPart + r.imaginaryPart * this->realPart + cross(this->imaginaryPart, r.imaginaryPart);
+        return Quaternion(newRealPart, newImaginary);
     }
 
     Quaternion inverse() const{
-        return Quaternion(realPart, -imaginaryPart);
+        Scalar squaredNorm = this->squaredNorm();
+        return Quaternion(realPart / squaredNorm, -imaginaryPart / squaredNorm);
     }
 
     void invert(){
@@ -75,12 +76,16 @@ public:
 
     // specific methods for quaternions...
     Quaternion conjugated() const{
-        // TODO Q-Conj a
-        return Quaternion();
+        return Quaternion(realPart, -imaginaryPart);
     }
 
     void conjugate(){
-        // TODO Q-Conj b
+        imaginaryPart = -imaginaryPart;
+    }
+
+    Scalar squaredNorm() const
+    {
+        return pow(realPart, 2) + pow(imaginaryPart.x,2) + pow(imaginaryPart.y, 2) + pow(imaginaryPart.z, 2);
     }
 
     // returns a rotation to look toward target, if you are in eye, and the up-vector is up
@@ -102,7 +107,14 @@ public:
     // conversions to this representation
     static Quaternion from( Matrix3 m );   // TODO M2Q
     static Quaternion from( Euler e );     // TODO E2Q
-    static Quaternion from( AxisAngle e ); // TODO A2Q
+    
+    static Quaternion from(AxisAngle e) //formula trovata nell'internet
+    {
+        Scalar sinAngle = sin(e.angle / 2);
+        Vector3 newImaginaryPart = Vector3(e.axis.x * sinAngle, e.axis.y * sinAngle, e.axis.z * sinAngle);
+        Scalar newRealPart = cos(e.angle / 2);
+        return Quaternion(newRealPart, newImaginaryPart);
+    }
 
     // does this quaternion encode a rotation?
     bool isRot() const{
