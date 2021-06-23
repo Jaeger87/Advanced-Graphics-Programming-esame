@@ -15,7 +15,7 @@
 
 	Quaternion::Quaternion(Scalar _realPart, Vector3 _imaginaryPart) :realPart(_realPart), imaginaryPart(_imaginaryPart) { }
 
-	Quaternion::Quaternion(Scalar a, Scalar b, Scalar c) :realPart(1), imaginaryPart(Vector3(a, b, c)) {}
+	Quaternion::Quaternion(Scalar a, Scalar b, Scalar c) :realPart(0), imaginaryPart(Vector3(a, b, c)) {}
 
 	Quaternion::Quaternion() :realPart(1), imaginaryPart(Vector3(0, 0, 0)) { }
 
@@ -116,7 +116,7 @@
 	}
 
 	void Quaternion::printf() const {
-		std::cout << "*this" << std::endl;
+		std::cout << *this << std::endl;
 	}
 
 

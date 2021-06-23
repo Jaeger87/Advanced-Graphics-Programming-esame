@@ -27,6 +27,9 @@
     <ClCompile Include="Matrix3.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Euler.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="axis_angle.h">

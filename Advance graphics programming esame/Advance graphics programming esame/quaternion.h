@@ -83,16 +83,16 @@ public:
     // does this quaternion encode a point?
     bool isPoint() const;
 
-    //friend std::ostream& operator<<(std::ostream&, const Quaternion&);
+    friend std::ostream& operator<<(std::ostream&, const Quaternion&);
 
     void printf() const;
 };
-/*
-std::ostream& operator<<(std::ostream& strm, const Quaternion& a) {
+
+inline std::ostream& operator<<(std::ostream& strm, const Quaternion& a) {
 	return strm << "Quaternion with real part:" << a.realPart
 		<< ", and imaginary part:" << a.imaginaryPart << std::endl;
 }
-*/
+
 // interpolation or rotations
 inline Quaternion lerp( const Quaternion& a,const Quaternion& b, Scalar t){
     // TODO Q-Lerp: how to interpolate quaternions

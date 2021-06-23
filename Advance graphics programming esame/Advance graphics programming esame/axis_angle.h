@@ -38,9 +38,9 @@ public:
     Point3  operator() (Point3  p);
     Vector3 operator() (Vector3 p);
 
-    Versor3 axisX() const;  // TODO A-Ax a
-    Versor3 axisY() const;  // TODO A-Ax b
-    Versor3 axisZ() const;  // TODO A-Ax c
+    Versor3 axisX() const;  
+    Versor3 axisY() const;  
+    Versor3 axisZ() const;
 
     // conjugate
     AxisAngle operator * (AxisAngle r) const;
@@ -58,8 +58,8 @@ public:
     static AxisAngle toFrom(Vector3 to, Vector3 from);
 
     // conversions to this representation
-    static AxisAngle from( Matrix3 m );   // TODO M2A
-    static AxisAngle from( Euler e );     // TODO E2A
+    static AxisAngle from( Matrix3 m );
+    static AxisAngle from( Euler e );
     
     static AxisAngle from(Quaternion q);
 

@@ -41,3 +41,4 @@ AxisAngle|A-FromPoint
 AxisAngle|apply( Vector3  v)
 AxisAngle|from(Quaternion q)
 AxisAngle|printf()
+Euler|printf()

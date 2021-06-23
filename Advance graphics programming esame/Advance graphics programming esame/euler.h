@@ -16,102 +16,75 @@ class Euler{
 public:
 
     /* fields */
-    Scalar alpha, beta, gamma;
+    Scalar x, y, z;
 
     // TODO E-Ide: this constructor construct the identity rotation
-    Euler(){}
+    Euler();
 
     // TODO E-Constr
     // row major order!
-    Euler( Scalar m00, Scalar m01, Scalar m02,
-             Scalar m10, Scalar m11, Scalar m12,
-             Scalar m20, Scalar m21, Scalar m22)
-    {
-    }
+    Euler(Scalar m00, Scalar m01, Scalar m02,
+        Scalar m10, Scalar m11, Scalar m12,
+        Scalar m20, Scalar m21, Scalar m22);
 
-    Vector3 apply( Vector3  v) const {
-        // TODO E-App: how to apply a rotation of this type?
-        return Vector3();
-    }
+    Vector3 apply(Vector3  v) const;
 
     // Rotations can be applied to versors or vectors just as well
-    Versor3 apply( Versor3 dir ) const {
-        return apply( dir.asVector() ).asVersor();
-    }
+    Versor3 apply(Versor3 dir) const;
 
-    Point3 apply( Point3 p ) const {
-        return apply( p.asVector() ).asPoint();
-    }
+    Point3 apply(Point3 p) const;
 
     // syntactic sugar: "R( p )" as a synomim of "R.apply( p )"
-    Versor3 operator() (Versor3 p) { return apply(p); }
-    Point3  operator() (Point3  p) { return apply(p); }
-    Vector3 operator() (Vector3 p) { return apply(p); }
+    Versor3 operator() (Versor3 p);
+    Point3  operator() (Point3  p);
+    Vector3 operator() (Vector3 p);
 
-    Versor3 axisX() const;  // TODO E-Ax a
-    Versor3 axisY() const;  // TODO E-Ax b
-    Versor3 axisZ() const;  // TODO E-Ax c
+    Versor3 axisX() const; 
+    Versor3 axisY() const; 
+    Versor3 axisZ() const;
 
     // conjugate
-    Euler operator * (Euler b) const {
-        return Euler();
-    }
+    Euler operator * (Euler b) const;
 
     //Non la fate (converti prima ad altro)
-    Euler inverse() const{
-        // TODO E-Inv a
-        return Euler();
-    }
+    Euler inverse() const;
 
-    void invert() const{
-        // TODO E-Inv b
-    }
+    void invert() const;
 
     // specific methods for Eulers...
-    Euler transposed() const{
-        // TODO E-Transp a
-        return Euler();
-    }
+    Euler transposed() const;
 
-    void transpose(){
-        // TODO E-Transp b
-    }
+    void transpose();
 
     // returns a rotation to look toward target, if you are in eye, and the up-vector is up
-    static Euler lookAt( Point3 eye, Point3 target, Versor3 up = Versor3::up() ){
-        // TODO E-LookAt
-        return Euler();
-    }
+    static Euler lookAt(Point3 eye, Point3 target, Versor3 up);
 
     // returns a rotation
-    static Euler toFrom( Versor3 to, Versor3 from ){
-        // TODO E-ToFrom
-        return Euler();
-    }
+    static Euler toFrom(Versor3 to, Versor3 from);
 
-    static Euler toFrom( Vector3 to, Vector3 from ){
-        return toFrom( normalize(to) , normalize(from) );
-    }
+    static Euler toFrom(Vector3 to, Vector3 from);
 
     // conversions to this representation
-    static Euler from( Quaternion m );// TODO Q2M
-    static Euler from( Euler e );     // TODO E2M
-    static Euler from( AxisAngle e ); // TODO E2M
+    static Euler from( Quaternion m );
+    static Euler from( Euler e );     
+    static Euler from( AxisAngle e ); 
 
     // does this Euler encode a rotation?
-    bool isRot() const{
-        // TODO E-isR
-        return false;
-    }
+    bool isRot() const;
 
     // return a rotation matrix around an axis
-    static Euler rotationX( Scalar angleDeg );   // TODO E-Rx
-    static Euler rotationY( Scalar angleDeg );   // TODO E-Rx
-    static Euler rotationZ( Scalar angleDeg );   // TODO E-Rx
+    static Euler rotationX( Scalar angleDeg );
+    static Euler rotationY( Scalar angleDeg );
+    static Euler rotationZ( Scalar angleDeg );
 
-    void printf() const {} // TODO Print
+    friend std::ostream& operator<<(std::ostream&, const Euler&);
+
+    void printf() const;
 };
 
+inline std::ostream& operator<<(std::ostream& strm, const Euler& a) {
+	return strm << "Euler(X:" << a.x << ", y:" << a.y << ", z:" << a.z << ")";
+}
 
 // interpolation or roations
 inline Euler directLerp( const Euler& a,const Euler& b, Scalar t){
