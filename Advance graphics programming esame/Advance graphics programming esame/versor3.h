@@ -2,15 +2,17 @@
 #include <math.h>
 #include "vector3.h"
 #include <assert.h>
+#include <iostream>
 
 typedef double Scalar;
 
 class Versor3{
     // constructors
     Versor3(Scalar _x, Scalar _y, Scalar _z):x(_x),y(_y),z(_z){ }
+    
 public:
+    Versor3() :x(0), y(0), z(0) { }
     Scalar x,y,z;
-
     static Versor3 right()   { return Versor3(+1, 0, 0);} // aka EAST
     static Versor3 left()    { return Versor3(-1, 0, 0);} // aka WEST
     static Versor3 up()      { return Versor3( 0,+1, 0);}
@@ -55,18 +57,18 @@ public:
         return Vector3(x,y,z);
     }
 
-    friend std::ostream& operator<<(std::ostream&, const Versor3&);
+    //friend std::ostream& operator<<(std::ostream&, const Versor3&);
 
     void printf() const {
-        std::cout << *this << std::endl;
+        std::cout << "*this" << std::endl;
     }
     //const_cast<Versor3&>(*this)
 };
-
+/*
 std::ostream& operator<<(std::ostream& strm, const Versor3& a) {
     return strm << "Versor3(" << a.x << ", " << a.y << ", " << a.z << ")";
 }
-
+*/
 inline Versor3 normalize(Vector3 p){
     Scalar n = norm(p);
     return Versor3( p.x/n, p.y/n, p.z/n );

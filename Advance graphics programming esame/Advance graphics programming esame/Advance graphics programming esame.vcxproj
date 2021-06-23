@@ -139,19 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="axis_angle.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="quaternion.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\axis_angle.h" />
-    <ClInclude Include="..\..\euler.h" />
-    <ClInclude Include="..\..\matrix3.h" />
-    <ClInclude Include="..\..\matrix4.h" />
-    <ClInclude Include="..\..\point3.h" />
-    <ClInclude Include="..\..\problems.h" />
-    <ClInclude Include="..\..\quaternion.h" />
-    <ClInclude Include="..\..\transform.h" />
-    <ClInclude Include="..\..\vector3.h" />
-    <ClInclude Include="..\..\versor3.h" />
+    <ClInclude Include="axis_angle.h" />
+    <ClInclude Include="euler.h" />
+    <ClInclude Include="matrix3.h" />
+    <ClInclude Include="matrix4.h" />
+    <ClInclude Include="point3.h" />
+    <ClInclude Include="problems.h" />
+    <ClInclude Include="quaternion.h" />
+    <ClInclude Include="transform.h" />
+    <ClInclude Include="vector3.h" />
+    <ClInclude Include="versor3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

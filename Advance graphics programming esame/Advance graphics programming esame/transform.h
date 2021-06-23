@@ -86,8 +86,8 @@ public:
     }
 
     void printf() const {
-        std::cout << "Transform with Scale:" << scale
-            << ", Rotation:" << rotation << ", Translation: " << translation << std::endl;
+       // std::cout << "Transform with Scale:" << scale
+        //    << ", Rotation:" << rotation << ", Translation: " << translation << std::endl;
     }
 
 };

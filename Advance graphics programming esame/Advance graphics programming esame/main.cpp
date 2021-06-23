@@ -53,7 +53,7 @@ int main()
     Versor3::down().printf();
 
     Matrix3 matrix = Matrix3();
-    std::cout << matrix << std::endl;
+    //std::cout << matrix << std::endl;
 
     unitTestInverse();
     unitTestCumlate();

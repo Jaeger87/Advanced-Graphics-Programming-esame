@@ -124,19 +124,21 @@ public:
     static Matrix3 rotationY( Scalar angleDeg );   // TODO M-Ry
     static Matrix3 rotationZ( Scalar angleDeg );   // TODO M-Rz
 
-    friend std::ostream& operator<<(std::ostream&, const Matrix3&);
+    //friend std::ostream& operator<<(std::ostream&, const Matrix3&);
 
     void printf() const {
-        std::cout << *this << std::endl;
+        std::cout << "*this" << std::endl;
     }
 };
 
+/*
 std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
     return strm << "Matrix3: [" << a.axisX()[0] << ", " << a.axisY()[0] << ", " << a.axisZ()[0] << std::endl <<
         a.axisX()[1] << ", " << a.axisY()[1] << ", " << a.axisZ()[1] << std::endl <<
         a.axisX()[2] << ", " << a.axisY()[2] << ", " << a.axisZ()[2] << "]";
 
-}           
+}  
+*/
 // interpolation of roations
 inline Matrix3 directLerp( const Matrix3& a,const Matrix3& b, Scalar t){
     // TODO M-directLerp: how to interpolate Matrix3s

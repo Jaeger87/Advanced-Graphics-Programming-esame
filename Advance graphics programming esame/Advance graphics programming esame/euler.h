@@ -4,7 +4,6 @@
 #include "vector3.h"
 #include "point3.h"
 #include "versor3.h"
-
 /* Euler class */
 /* this class is a candidate to store a rotation! */
 /* as such, it implements all the expected methods    */

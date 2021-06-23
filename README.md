@@ -39,3 +39,5 @@ Quaternion|from(AxisAngle e)
 AxisAngle|A-Ide: this constructor construct the identity rotation
 AxisAngle|A-FromPoint
 AxisAngle|apply( Vector3  v)
+AxisAngle|from(Quaternion q)
+AxisAngle|printf()
