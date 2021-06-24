@@ -4,6 +4,7 @@
 #include "vector3.h"
 #include "point3.h"
 #include "versor3.h"
+#include "axis_angle.h"
 /* Euler class */
 /* this class is a candidate to store a rotation! */
 /* as such, it implements all the expected methods    */
@@ -18,10 +19,8 @@ public:
     /* fields */
     Scalar pitchX, yawY, rollZ;
 
-    // TODO E-Ide: this constructor construct the identity rotation
     Euler();
 
-    // TODO E-Constr
     // row major order!
     Euler(Scalar m00, Scalar m01, Scalar m02,
         Scalar m10, Scalar m11, Scalar m12,
@@ -49,7 +48,7 @@ public:
     //Non la fate (converti prima ad altro)
     Euler inverse() const;
 
-    void invert() const;
+    void invert();
 
     // specific methods for Eulers...
     Euler transposed() const;
@@ -93,8 +92,10 @@ inline Euler directLerp( const Euler& a,const Euler& b, Scalar t){
 }
 //Non la fate (converti prima ad altro)
 inline Euler lerp( const Euler& a,const Euler& b, Scalar t){
-    // TODO E-smartLerp: how to interpolate Eulers
-    return Euler();
+    AxisAngle aAxis = AxisAngle::from(a);
+    AxisAngle bAxis = AxisAngle::from(b);
+    AxisAngle lerped = lerp(aAxis, bAxis, t);
+    return Euler::from(lerped);
 }
 
 

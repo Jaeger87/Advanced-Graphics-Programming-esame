@@ -53,12 +53,14 @@
 
 	//Non la fate (converti prima ad altro)
 	Euler Euler::inverse() const {
-		// TODO E-Inv a
-		return Euler();
+		return Euler::from(Quaternion::from(*this).inverse());
 	}
 
-	void Euler::invert() const {
-		// TODO E-Inv b
+	void Euler::invert() {
+		Euler inverse = Euler::inverse();
+		pitchX = inverse.pitchX;
+		rollZ = inverse.rollZ;
+		yawY = inverse.yawY;
 	}
 
 	// specific methods for Eulers...
@@ -88,7 +90,9 @@
 	}
 
 	// conversions to this representation
-	Euler Euler::from(Quaternion m) { return Euler(); }// TODO Q2M
+	Euler Euler::from(Quaternion q) {
+		return Euler::from(Matrix3::from(q));
+	}
 	Euler Euler::from(Matrix3 m) {
 		Euler e;
 		Scalar sp = -m.matrix[1].z;
@@ -112,17 +116,13 @@
 			e.yawY = atan2(m.matrix[0].z, m.matrix[2].z);
 			e.rollZ = atan2(m.matrix[1].x, m.matrix[1].y);
 		}
-
 		return e;
-
-		return Euler(); 
 	}     // TODO E2M
 	Euler Euler::from(AxisAngle e) { return Euler(); } // TODO E2M
 
 	// does this Euler encode a rotation?
 	bool Euler::isRot() const {
-		// TODO E-isR
-		return false;
+		return Matrix3::from(*this).isRot();
 	}
 
 	// return a rotation matrix around an axis

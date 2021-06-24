@@ -93,8 +93,14 @@
 
 	// conversions to this representation
 	static Quaternion from(Matrix3 m);   // TODO M2Q
-	static Quaternion from(Euler e) ;     // TODO E2Q
-
+	Quaternion Quaternion::from(Euler e) // Trovato su internet: https://math.stackexchange.com/questions/2975109/how-to-convert-euler-angles-to-quaternions-and-get-the-same-euler-angles-back-fr
+	{
+		Scalar qx = sin(e.rollZ / 2) * cos(e.pitchX / 2) * cos(e.yawY / 2) - cos(e.rollZ / 2) * sin(e.pitchX / 2) * sin(e.yawY / 2);
+		Scalar qy = cos(e.rollZ / 2) * sin(e.pitchX / 2) * cos(e.yawY / 2) + sin(e.rollZ / 2) * cos(e.pitchX / 2) * sin(e.yawY / 2);
+		Scalar qz = cos(e.rollZ / 2) * cos(e.pitchX / 2) * sin(e.yawY / 2) - sin(e.rollZ / 2) * sin(e.pitchX / 2) * cos(e.yawY / 2);
+		Scalar qw = cos(e.rollZ / 2) * cos(e.pitchX / 2) * cos(e.yawY / 2) + sin(e.rollZ / 2) * sin(e.pitchX / 2) * sin(e.yawY / 2);
+		return Quaternion(qw, Vector3(qx, qy, qz));
+	}
 	Quaternion Quaternion::from(AxisAngle e) //formula trovata nell'internet: https://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
 	{
 		Scalar sinAngle = sin(e.angle / 2);
