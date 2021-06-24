@@ -42,13 +42,16 @@
 	Point3  Euler::operator() (Point3  p) { return apply(p); }
 	Vector3 Euler::operator() (Vector3 p) { return apply(p); }
 
-	Versor3 Euler::axisX() const { return Versor3::forward(); }  // TODO E-Ax a
-	Versor3 Euler::axisY() const { return Versor3::forward(); }   // TODO E-Ax b
-	Versor3 Euler::axisZ() const { return Versor3::forward(); }   // TODO E-Ax c
+	Versor3 Euler::axisX() const { return Matrix3::from(*this).axisX(); } 
+	Versor3 Euler::axisY() const { return Matrix3::from(*this).axisY(); }
+	Versor3 Euler::axisZ() const { return Matrix3::from(*this).axisZ(); }
 
 	// conjugate
 	Euler Euler::operator * (Euler b) const {
-		return Euler();
+		Quaternion thisAsQ = Quaternion::from(*this);
+		Quaternion bAsQ = Quaternion::from(b);
+		Quaternion newQuaternion = thisAsQ * bAsQ;
+		return Euler::from(newQuaternion);
 	}
 
 	//Non la fate (converti prima ad altro)
@@ -63,10 +66,11 @@
 		yawY = inverse.yawY;
 	}
 
+	//non fatela!
 	// specific methods for Eulers...
 	Euler Euler::transposed() const {
 		// TODO E-Transp a
-		return Euler();
+		return Euler::from(Matrix3::from(*this));
 	}
 
 	void Euler::transpose() {

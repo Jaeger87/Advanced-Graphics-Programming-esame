@@ -17,7 +17,7 @@ class Euler{
 public:
 
     /* fields */
-    Scalar pitchX, yawY, rollZ;
+    Scalar pitchX, yawY, rollZ; //gradi
 
     Euler();
 

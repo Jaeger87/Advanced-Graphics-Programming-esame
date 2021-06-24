@@ -38,9 +38,9 @@
 	Point3  AxisAngle::operator() (Point3  p) { return apply(p); }
 	Vector3 AxisAngle::operator() (Vector3 p) { return apply(p); }
 
-	Versor3 AxisAngle::axisX() const { return Versor3::forward(); }  // TODO A-Ax a
-	Versor3 AxisAngle::axisY() const { return Versor3::forward(); }  // TODO A-Ax b
-	Versor3 AxisAngle::axisZ() const { return Versor3::forward(); }  // TODO A-Ax c
+	Versor3 AxisAngle::axisX() const { return Matrix3::from(*this).axisX(); }
+	Versor3 AxisAngle::axisY() const { return Matrix3::from(*this).axisY(); }
+	Versor3 AxisAngle::axisZ() const { return Matrix3::from(*this).axisZ(); } 
 
 	// conjugate
 	AxisAngle AxisAngle::operator * (AxisAngle r) const {

@@ -41,13 +41,13 @@
 	Point3  Quaternion::operator() (Point3  p) { return apply(p); }
 	Vector3 Quaternion::operator() (Vector3 p) { return apply(p); }
 
-	Versor3 Quaternion::axisX() const { return Versor3::forward(); }  // TODO Q-Ax a
-	Versor3 Quaternion::axisY() const { return Versor3::forward(); }  // TODO Q-Ax b
-	Versor3 Quaternion::axisZ() const { return Versor3::forward(); }  // TODO Q-Ax c
+	Versor3 Quaternion::axisX() const { return Matrix3::from(*this).axisX(); }
+	Versor3 Quaternion::axisY() const { return Matrix3::from(*this).axisY(); }
+	Versor3 Quaternion::axisZ() const { return Matrix3::from(*this).axisZ(); } 
 
 	// conjugate
 	Quaternion Quaternion::operator * (Quaternion r) const {
-		Scalar newRealPart = dot(this->imaginaryPart, r.imaginaryPart) + this->realPart + r.realPart;
+		Scalar newRealPart = dot(this->imaginaryPart, r.imaginaryPart) + this->realPart * r.realPart;
 		Vector3 newImaginary = this->imaginaryPart * r.realPart + r.imaginaryPart * this->realPart + cross(this->imaginaryPart, r.imaginaryPart);
 		return Quaternion(newRealPart, newImaginary);
 	}

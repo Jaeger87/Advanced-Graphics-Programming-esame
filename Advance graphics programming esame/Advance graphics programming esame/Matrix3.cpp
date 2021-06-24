@@ -71,7 +71,12 @@ class Euler;
 
     // combine two rotations (r goes first!)
     Matrix3 Matrix3::operator * (Matrix3 r) const {
-        return Matrix3();
+        Vector3 row1 = Vector3(matrix[0].x, matrix[0].y, matrix[0].z);
+        Vector3 row2 = Vector3(matrix[1].x, matrix[1].y, matrix[1].z);
+        Vector3 row3 = Vector3(matrix[2].x, matrix[2].y, matrix[2].z);
+        return Matrix3(dot(row1,matrix[0].asVector()), dot(row1, matrix[1].asVector()), dot(row1, matrix[2].asVector()),
+            dot(row2, matrix[0].asVector()), dot(row2, matrix[1].asVector()), dot(row2, matrix[2].asVector()),
+            dot(row3, matrix[0].asVector()), dot(row3, matrix[1].asVector()), dot(row3, matrix[2].asVector()));
     }
 
     Matrix3 Matrix3::inverse() const {
