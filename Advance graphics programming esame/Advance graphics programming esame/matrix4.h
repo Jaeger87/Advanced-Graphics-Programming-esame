@@ -4,7 +4,7 @@
 #include "point3.h"
 #include "versor3.h"
 
-// INGORE THIS CLASS
+// INGORE THIS CLAS
 
 
 // stores a 4x4 transformation matrix

@@ -21,10 +21,11 @@ public:
 
     Euler();
 
-    // row major order!
     Euler(Scalar m00, Scalar m01, Scalar m02,
         Scalar m10, Scalar m11, Scalar m12,
         Scalar m20, Scalar m21, Scalar m22);
+
+	Euler(Scalar _pitchX, Scalar _yawY, Scalar _rollZ);
 
     Vector3 apply(Vector3  v) const;
 

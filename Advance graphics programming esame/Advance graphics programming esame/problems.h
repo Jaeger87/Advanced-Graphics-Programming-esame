@@ -71,7 +71,7 @@ Versor3 orthogonalize( const Versor3 &a, const Versor3 &b ){
     // TODO: P-ortogonalize
     return Versor3::up();
 }
-
+//
 // a bullet is in position pa and has velocity va
 // a target is in position pb and has velocity vb
 // returns the position of the target in the moment it is closest to the bullet

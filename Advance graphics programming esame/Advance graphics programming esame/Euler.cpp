@@ -12,20 +12,25 @@
 /* this class is a candidate to store a rotation! */
 /* as such, it implements all the expected methods    */
 
-	// TODO E-Ide: this constructor construct the identity rotation
-	Euler::Euler() {}
+	Euler::Euler(): pitchX(0), yawY(0),rollZ(0) {}
 
 	// TODO E-Constr
-	// row major order!
 	Euler::Euler(Scalar m00, Scalar m01, Scalar m02,
 		Scalar m10, Scalar m11, Scalar m12,
 		Scalar m20, Scalar m21, Scalar m22)
 	{
+		Matrix3 matrix3 = Matrix3(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+		Euler e = Euler::from(matrix3);
+		Euler::pitchX = e.pitchX;
+		Euler::yawY = e.yawY;
+		Euler::rollZ = e.rollZ;
 	}
 
+	Euler::Euler(Scalar _pitchX, Scalar _yawY, Scalar _rollZ):pitchX(_pitchX), yawY(_yawY), rollZ(_rollZ) {}
+
 	Vector3 Euler::apply(Vector3  v) const {
-		// TODO E-App: how to apply a rotation of this type?
-		return Vector3();
+		Matrix3 matrix3 = Matrix3::from(*this);
+		return matrix3.apply(v);
 	}
 
 	// Rotations can be applied to versors or vectors just as well
@@ -69,12 +74,14 @@
 	//non fatela!
 	// specific methods for Eulers...
 	Euler Euler::transposed() const {
-		// TODO E-Transp a
 		return Euler::from(Matrix3::from(*this));
 	}
 
 	void Euler::transpose() {
-		// TODO E-Transp b
+		Euler transposed = Euler::transposed();
+		this->rollZ = transposed.rollZ;
+		this->yawY = transposed.yawY;
+		this->pitchX = transposed.pitchX;
 	}
 
 	// returns a rotation to look toward target, if you are in eye, and the up-vector is up
