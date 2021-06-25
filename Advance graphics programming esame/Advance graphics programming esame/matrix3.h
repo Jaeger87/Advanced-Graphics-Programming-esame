@@ -99,8 +99,10 @@ inline Matrix3 directLerp( const Matrix3& a,const Matrix3& b, Scalar t){
 
 //Non la fate (converti prima ad altro)
 inline Matrix3 lerp( const Matrix3& a,const Matrix3& b, Scalar t){
-    // TODO M-smartLerp: how to interpolate Matrix3s
-    return Matrix3();
+	AxisAngle aAxis = AxisAngle::from(a);
+	AxisAngle bAxis = AxisAngle::from(b);
+	AxisAngle lerped = lerp(aAxis, bAxis, t);
+    return Matrix3::from(lerped);
 }
 
 

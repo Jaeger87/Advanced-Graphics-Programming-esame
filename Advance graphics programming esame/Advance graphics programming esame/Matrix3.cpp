@@ -109,12 +109,40 @@ class Euler;
     }
 
     // conversions to this representation
-    Matrix3 Matrix3::from(Quaternion m) { return Matrix3(); }// TODO Q2M
+    Matrix3 Matrix3::from(Quaternion q) { return Matrix3::from(AxisAngle::from(q)); }
     Matrix3 Matrix3::from(Euler e) {
 
         return Matrix3(); 
-    }     // TODO E2M
-    Matrix3 Matrix3::from(AxisAngle e) { return Matrix3(); } // TODO A2M
+    }   
+    // TODO E2M
+
+
+	Matrix3 Matrix3::from(AxisAngle a) {https://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToMatrix/
+	double c = cos(a.angle);
+	double s = sin(a.angle);
+	double t = 1.0 - c;
+
+
+	Scalar m00 = c + a.axis.x * a.axis.x * t;
+    Scalar m11 = c + a.axis.y * a.axis.y * t;
+    Scalar m22 = c + a.axis.z * a.axis.z * t;
+
+
+	double tmp1 = a.axis.x * a.axis.y * t;
+	double tmp2 = a.axis.z * s;
+	Scalar m10 = tmp1 + tmp2;
+    Scalar m01 = tmp1 - tmp2;
+	tmp1 = a.axis.x * a.axis.z * t;
+	tmp2 = a.axis.y * s;
+    Scalar m20 = tmp1 - tmp2;
+    Scalar m02 = tmp1 + tmp2;    
+    tmp1 = a.axis.y * a.axis.z * t;
+	tmp2 = a.axis.x * s;
+    Scalar m21 = tmp1 + tmp2;
+    Scalar m12 = tmp1 - tmp2;
+    return Matrix3(m00, m01, m02,
+        m10, m11, m12,
+        m20, m21, m22); }
 
     // does this Matrix3 encode a rotation?
     bool Matrix3::isRot() const {
@@ -123,25 +151,11 @@ class Euler;
     }
 
     // return a rotation matrix around an axis
-    Matrix3 Matrix3::rotationX(Scalar angleDeg) { return Matrix3(); }   // TODO M-Rx
-    Matrix3 Matrix3::rotationY(Scalar angleDeg) { return Matrix3(); }   // TODO M-Ry
-    Matrix3 Matrix3::rotationZ(Scalar angleDeg) { return Matrix3(); }   // TODO M-Rz
+    Matrix3 Matrix3::rotationX(Scalar angleDeg) { return Matrix3::from(Euler::rotationX(angleDeg)); }
+    Matrix3 Matrix3::rotationY(Scalar angleDeg) { return Matrix3::from(Euler::rotationY(angleDeg)); }
+    Matrix3 Matrix3::rotationZ(Scalar angleDeg) { return Matrix3::from(Euler::rotationZ(angleDeg)); }
 
 
     void Matrix3::printf() const {
         std::cout << *this << std::endl;
     }
-
-
-/*
-std::ostream& operator<<(std::ostream& strm, const Matrix3& a) {
-    return strm << "Matrix3: [" << a.axisX()[0] << ", " << a.axisY()[0] << ", " << a.axisZ()[0] << std::endl <<
-        a.axisX()[1] << ", " << a.axisY()[1] << ", " << a.axisZ()[1] << std::endl <<
-        a.axisX()[2] << ", " << a.axisY()[2] << ", " << a.axisZ()[2] << "]";
-
-}
-*/
-
-
-
-

@@ -71,9 +71,24 @@
 		return toFrom(normalize(to), normalize(from));
 	}
 
-	// conversions to this representation
-	AxisAngle AxisAngle::from(Matrix3 m) { return AxisAngle(); }   // TODO M2A
-	AxisAngle AxisAngle::from(Euler e) { return AxisAngle(); }     // TODO E2A
+	// conversions to this representation Trovato su internet: https://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/index.htm
+	AxisAngle AxisAngle::from(Matrix3 m) {
+
+		Scalar s = sqrt((m.matrix[2].y - m.matrix[1].z) * (m.matrix[2].y - m.matrix[1].z)
+			+ (m.matrix[0].z - m.matrix[2].x) * (m.matrix[0].z - m.matrix[2].x)
+			+ (m.matrix[1].x - m.matrix[0].y) * (m.matrix[1].x - m.matrix[0].y));
+		if (abs(s) < 0.001) s = 1;
+		// prevent divide by zero, should not happen if matrix is orthogonal and should be
+		Scalar angle = acos((m.matrix[0].x + m.matrix[1].y + m.matrix[2].z - 1) / 2);
+		Scalar x = (m.matrix[2].y - m.matrix[1].z) / s;
+		Scalar y = (m.matrix[0].z - m.matrix[2].x) / s;
+		Scalar z = (m.matrix[1].x - m.matrix[0].y) / s;
+		return AxisAngle(Vector3(x, y, z).asVersor(), angle);
+	} 
+
+	AxisAngle AxisAngle::from(Euler e) {
+		return AxisAngle::from(Matrix3::from(e)); 
+	}  
 
 	AxisAngle AxisAngle::from(Quaternion q) // trovata su internet: https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/index.htm
 	{

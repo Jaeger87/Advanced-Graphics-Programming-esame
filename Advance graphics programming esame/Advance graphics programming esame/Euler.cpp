@@ -128,8 +128,10 @@
 			e.rollZ = atan2(m.matrix[1].x, m.matrix[1].y);
 		}
 		return e;
-	}     // TODO E2M
-	Euler Euler::from(AxisAngle e) { return Euler(); } // TODO E2M
+	}  
+	Euler Euler::from(AxisAngle e) { 
+		return Euler::from(Matrix3::from(e)); 
+	}
 
 	// does this Euler encode a rotation?
 	bool Euler::isRot() const {
@@ -137,9 +139,9 @@
 	}
 
 	// return a rotation matrix around an axis
-	Euler Euler::rotationX(Scalar angleDeg) { return Euler(); }   // TODO E-Rx
-	Euler Euler::rotationY(Scalar angleDeg) { return Euler(); }   // TODO E-Rx
-	Euler Euler::rotationZ(Scalar angleDeg) { return Euler(); }   // TODO E-Rx
+	Euler Euler::rotationX(Scalar angleDeg) { return Euler(angleDeg,0,0); }  
+	Euler Euler::rotationY(Scalar angleDeg) { return Euler(0,angleDeg,0); } 
+	Euler Euler::rotationZ(Scalar angleDeg) { return Euler(0,0,angleDeg); } 
 
 	void Euler::printf() const { std::cout << *this << std::endl; } 
 

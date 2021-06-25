@@ -115,8 +115,9 @@
 
 	// does this quaternion encode a rotation?
 	bool Quaternion::isRot() const {
-		// TODO Q-isR
-		return false;
+		Scalar squaredNorm = realPart * realPart + imaginaryPart.x * imaginaryPart.x +
+			imaginaryPart.y * imaginaryPart.y + imaginaryPart.z * imaginaryPart.z;
+		return squaredNorm >= 1 - std::numeric_limits<double>::epsilon() && squaredNorm >= 1 + std::numeric_limits<double>::epsilon();
 	}
 
 	// does this quaternion encode a point?

@@ -120,7 +120,7 @@ inline Vector3 cross(const Vector3 &a, const Vector3 &b){
 }
 
 inline Scalar squaredNorm(const Vector3 &a){
-    return  dot(a,a) ;
+    return  dot(a,a);
 }
 
 inline Scalar norm(const Vector3 &a){
