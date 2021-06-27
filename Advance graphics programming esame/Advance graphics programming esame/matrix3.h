@@ -1,13 +1,13 @@
 #pragma once
 
 #include <math.h>
-
+#include "axis_angle.h"
 /* Matrix3 class */
 /* this class is a candidate to store a rotation! */
 /* as such, it implements all the expected methods    */
 
 class Quaternion;
-class AxisAngle;
+//class AxisAngle;
 class Euler;
 
 class Versor3;

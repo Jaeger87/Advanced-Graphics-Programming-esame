@@ -78,8 +78,13 @@ inline std::ostream& operator<<(std::ostream& strm, const AxisAngle& a) {
 // interpolation or rotations
 inline AxisAngle lerp( const AxisAngle& a,const AxisAngle& b, Scalar t){
     // TODO A-Lerp: how to interpolate AxisAngles
+
+    Scalar dotProduct = dot(a.axis, b.axis) + (a.angle * b.angle); 
+    if (dotProduct > 0)
+        return AxisAngle(slerp(a.axis, -b.axis, t), (1 - t) * a.angle + t * -b.angle);
+    
     // hints: shortest path! Also, consider them are 4D unit vectors.
-    return AxisAngle();
+    return AxisAngle(slerp(a.axis, b.axis, t), (1 - t) * a.angle + t * b.angle);
 }
 
 
